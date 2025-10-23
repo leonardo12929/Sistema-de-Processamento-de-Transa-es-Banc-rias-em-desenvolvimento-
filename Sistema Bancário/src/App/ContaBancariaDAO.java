@@ -19,4 +19,18 @@ public class ContaBancariaDAO {
             System.out.println("Erro em: " + e);
         }
     }
+
+    public void deletar(int id) {
+        String sql = "DELETE FROM contaBancaria WHERE id = ?";
+        try {
+            Connection connection = ModuloConexao.Conexao();
+            PreparedStatement pst = connection.prepareStatement(sql);
+            pst.setInt(1, id);
+            pst.executeUpdate();
+            System.out.println("Linha "+id+" deletada");
+        } catch (Exception e) {
+            System.out.println("Erro função inserir"+e);
+        }
+        
+    }
 }
