@@ -7,8 +7,8 @@ public class App {
         Scanner scanner = new Scanner(System.in);
         ContaBancariaDAO contaBancariaDAO = new ContaBancariaDAO();
         while (true) {
-
-            System.out.println("1 - inserir valores\n2 - deletar");
+            contaBancariaDAO.mostrar();
+            System.out.println("\n1 - inserir valores\n2 - deletar");
             int opc = scanner.nextInt();
             if (opc == 1 ) {
                 scanner.nextLine(); // limpa o buffer
