@@ -7,7 +7,11 @@ public class App {
         Scanner scanner = new Scanner(System.in);
         ContaBancariaDAO contaBancariaDAO = new ContaBancariaDAO();
         while (true) {
-            contaBancariaDAO.mostrar();
+            System.out.println("Contas:");
+            for (ContaBancaria c: contaBancariaDAO.listaContas() ) {
+                System.out.print("\nNumero da conta: " + c.getNumeroConta());
+                System.out.print("titular: " + c.getTitular());
+            }
             System.out.println("\n1 - inserir valores\n2 - deletar");
             int opc = scanner.nextInt();
             if (opc == 1 ) {

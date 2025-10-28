@@ -1,5 +1,7 @@
 package src.App;
 
+import java.util.ArrayList;
+import java.util.List;
 import src.App.ContaBancaria;
 import src.Modulo.ModuloConexao;
 import java.sql.*;
@@ -46,24 +48,31 @@ public class ContaBancariaDAO {
 
     }
 
-    public void mostrar() {
+    public List<ContaBancaria> listaContas() {
+
+        List<ContaBancaria> contasBancarias = new ArrayList<ContaBancaria>();
         try {
             Connection connection = ModuloConexao.Conexao();
             if (connection != null) {
                 Statement stmt = connection.createStatement();
                 ResultSet set = stmt.executeQuery("SELECT * FROM  contabancaria");
                 while (set.next()) {
-                    int id = set.getInt("id");
-                    String numeroConta = set.getString("numeroConta");
-                    Float saldo = set.getFloat("saldo");
-                    String titular = set.getString("titular");
-                    System.out.println("\nId: " + id + " Saldo: " + saldo + " Titular: " + titular);
+                    ContaBancaria contaBancaria = new ContaBancaria();
+
+                    contaBancaria.setNumeroConta(set.getString("numeroConta"));
+                    contaBancaria.setSaldo(set.getFloat("saldo"));
+                    contaBancaria.setTitular(set.getString("titular"));
+
+                    contasBancarias.add(contaBancaria); 
                 }
+                return contasBancarias;
             } else {
                 System.out.println("Erro na conexão com o banco");
+                return null;
             }
         } catch (Exception e) {
             System.out.println("Erro função mostrar: " + e);
+            return null;
         }
     }
 
